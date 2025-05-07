@@ -6,10 +6,15 @@ require("dotenv").config();
 const app = express();
 const pool = new Pool({ connectionString: process.env.POSTGRES_URL });
 
-app.use(cors());
+const corsOptions = {
+  origin: "https://final-frontend.vercel.app",
+  methods: ["GET", "POST", "DELETE"],
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 
-// ✅ This must come after `app` is declared
 app.get("/", (req, res) => {
   res.send("Backend is alive!");
 });
