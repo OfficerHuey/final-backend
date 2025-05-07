@@ -1,3 +1,7 @@
+app.get("/", (req, res) => {
+  res.send("Backend is alive!");
+});
+
 const express = require("express");
 const cors = require("cors");
 const { Pool } = require("pg");
@@ -31,4 +35,3 @@ app.delete("/api/items/:id", async (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
-
