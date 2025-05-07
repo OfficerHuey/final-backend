@@ -1,7 +1,3 @@
-app.get("/", (req, res) => {
-  res.send("Backend is alive!");
-});
-
 const express = require("express");
 const cors = require("cors");
 const { Pool } = require("pg");
@@ -12,6 +8,11 @@ const pool = new Pool({ connectionString: process.env.POSTGRES_URL });
 
 app.use(cors());
 app.use(express.json());
+
+// ✅ This must come after `app` is declared
+app.get("/", (req, res) => {
+  res.send("Backend is alive!");
+});
 
 app.get("/api/items", async (req, res) => {
   const result = await pool.query("SELECT * FROM items ORDER BY id ASC");
